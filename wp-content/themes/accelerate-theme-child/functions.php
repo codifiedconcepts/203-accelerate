@@ -10,7 +10,7 @@
 * @since Accelerate Marketing 2.0
 */
 
-/// Enqueue scripts and styles
+// Enqueue scripts and styles
 function accelerate_child_scripts() {
 	wp_enqueue_style( 'accelerate-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'accelerate-style' ));
@@ -30,6 +30,18 @@ function create_custom_post_types() {
             'public' => true,
             'has_archive' => true,
             'rewrite' => array( 'slug' => 'case-studies' ),
+        )
+    );
+	//post type for services on About page
+    register_post_type( 'our_services',
+        array(
+            'labels' => array(
+                'name' => __( 'Our Services' ),
+                'singular_name' => __( 'Service' )
+            ),
+            'public' => true,
+			//no archive so we can use the About page to display instead
+            'has_archive' => false,
         )
     );
 }

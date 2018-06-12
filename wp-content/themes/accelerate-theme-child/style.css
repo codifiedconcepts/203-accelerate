@@ -39,9 +39,10 @@
 .homepage-featured-work,
 .homepage-featured-services {
 	list-style: none;
-	margin: 0 auto;
+	margin: 0;
 	padding: 0;
 	text-align: center;
+	display: table;
 	width: 100%;
 }
 .individual-featured-work,
@@ -156,14 +157,14 @@ nf-field input[type="button"] {
 .services .site-content {
     display: block;
 }
-.our-services section {                                        /*could also use .individual-service*/
+.our-services section {                        /*could also use .individual-service*/
     margin: 4em auto;
 }
-.our-services section h2 {                                 /*could also use .individual-service h2*/
+.our-services section h2 {                    /*could also use .individual-service h2*/
     font: 600 1.5em/1.5 'Open Sans', Arial, sans-serif;
     margin: 0 0 .5em;
 }
-.our-services section figure {                            /*could also use .individual-service figure*/
+.our-services section figure {                /*could also use .individual-service figure*/
     text-align: center;
     margin-bottom: 2em;
 }
@@ -244,26 +245,13 @@ nf-field input[type="button"] {
 
 /* Media Queries */
 @media (min-width: 768px) {
-    .featured-work .site-content,
-    .featured-services .site-content {
+    .featured-work .site-content {
         display: block;
         margin: auto auto 3em;
     }
-    .individual-featured-work,
-    .individual-featured-service {
-    	float: left;
-    }
     .individual-featured-work {
-        width: 32%;
-        margin-right: 2%;
-    }
-    .individual-featured-service {
-        width: 23%;
-        margin-right: 2%;
-    }
-    li.individual-featured-work:last-of-type,
-    li.individual-featured-service:last-of-type {
-        margin-right: 0;
+    	display: table-cell;
+        padding: 0 .5em;
     }
     .blog-post {
     	width: 50%;
@@ -298,13 +286,19 @@ nf-field input[type="button"] {
         clear: none;
     }
 
-    .our-services section figure {                                        /*could also use .individual-service figure*/
-        float: left;
-        margin-right: 2em;
+    .our-services section {                                        /*could also use .individual-service*/
+        display: flex;
+        align-items: center;
+    }
+    .our-services section:nth-child(even) {            /*could also use .individual-service:nth-child(even)*/
+        flex-direction: row-reverse;
+    }
+    .our-services section figure {                            /*could also use .individual-service figure*/
+        min-width: 12em;
+        margin-right: 4em;
         margin-bottom: 0;
     }
     .our-services section:nth-child(even) figure {            /*could also use .individual-service:nth-child(even) figure*/
-        float: right;
         margin-left: 2em;
         margin-right: 0;
     }

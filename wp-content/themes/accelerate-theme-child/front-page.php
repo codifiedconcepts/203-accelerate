@@ -28,9 +28,13 @@ get_header(); ?>
 		<div class="site-content clearfix">
 			<h4>Featured Work</h4>
 			<ul class="homepage-featured-work">
-				<?php query_posts('posts_per_page=3&post_type=case_studies'); ?>
-				<!-- the loop -->
-					<?php while ( have_posts() ) : the_post();
+				<?php
+				// the query
+				$the_query = new WP_Query( array( 'posts_per_page' => 3, 'post_type' => 'case_studies') ); ?>
+
+				<?php if ( $the_query->have_posts() ) : ?>
+					<!-- the loop -->
+					<?php while ( $the_query->have_posts() ) : $the_query->the_post();
 						$image_1 = get_field("image_1");
 						$size = "medium"; ?>
 
@@ -42,34 +46,42 @@ get_header(); ?>
 								<h3><?php the_title(); ?></h3>
 							</a>
 						</li>
-					<?php endwhile; // end of the loop. ?>
-				<?php wp_reset_query(); // resets the altered query back to the original ?>
+					<?php endwhile; ?>
+					<!-- end of the loop -->
+					<?php wp_reset_postdata(); ?>
+				<?php endif; ?>
 			</ul>
 		</div>
 	</section>
 
 	<!-- RECENT BLOG POST -->
-	<section class="recent-posts">
-		<div class="site-content">
-			<div class="blog-post">
-				<h4>From the Blog</h4>
-				<?php query_posts('posts_per_page=1'); ?>
-				<!-- the loop -->
-					<?php while ( have_posts() ) : the_post(); ?>
+	<?php
+	// the query
+	$the_query = new WP_Query( array( 'posts_per_page' => 1) ); ?>
+
+	<?php if ( $the_query->have_posts() ) : ?>
+		<section class="recent-posts">
+			<div class="site-content">
+				<div class="blog-post">
+					<h4>From the Blog</h4>
+					<!-- the loop -->
+					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<h3><?php the_title(); ?></h3>
 						<?php the_excerpt(); ?>
-					<?php endwhile; // end of the loop. ?>
-				<?php wp_reset_query(); // resets the altered query back to the original ?>
-			</div>
-
-			<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
-				<div id="secondary" class="widget-area" role="complementary">
-					<h4>Recent Tweet</h4>
-					<?php dynamic_sidebar( 'sidebar-2' ); ?>
-					<a class="read-more-link" href="#">Follow Me &rsaquo;</a>
+					<?php endwhile; ?>
+					<!-- end of the loop -->
 				</div>
-			<?php endif; ?>
-		</div>
-	</section>
+
+				<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
+					<div id="secondary" class="widget-area" role="complementary">
+						<h4>Recent Tweet</h4>
+						<?php dynamic_sidebar( 'sidebar-2' ); ?>
+						<a class="read-more-link" href="#">Follow Me &rsaquo;</a>
+					</div>
+				<?php endif; ?>
+			</div>
+		</section>
+		<?php wp_reset_postdata(); ?>
+	<?php endif; ?>
 
 <?php get_footer(); ?>
