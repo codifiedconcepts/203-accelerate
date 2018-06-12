@@ -42,7 +42,6 @@
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	display: table;
 	width: 100%;
 }
 .individual-featured-work,
@@ -154,9 +153,6 @@ nf-field input[type="button"] {
 	color: #fff;
 }
 
-.services .site-content {
-    display: block;
-}
 .our-services section {                        /*could also use .individual-service*/
     margin: 4em auto;
 }
@@ -344,12 +340,11 @@ ul.social-media-menu li {
 @media (min-width: 768px) {
     .featured-work .site-content,
     .featured-services .site-content {
-        display: block;
         margin: auto auto 3em;
     }
     .individual-featured-work,
     .individual-featured-service {
-    	display: table-cell;
+    	display: inline-block;
         padding: 0 .5em;
     }
     .blog-post {
