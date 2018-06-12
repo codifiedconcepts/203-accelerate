@@ -10,11 +10,24 @@
 * @since Accelerate Marketing 2.0
 */
 
+// Theme support for post-thumbnails and menus; bonus to get blog page with featured images, etc.
+function accelerate_child_setup() {
+
+	// Post thumbnails support
+	add_theme_support('post-thumbnails');
+
+	// Post Formats, bonus challenge
+    add_theme_support( 'post-formats', array( 'quote', 'video' ) );
+}
+add_action( 'after_setup_theme', 'accelerate_child_setup' );
+
 // Enqueue scripts and styles
 function accelerate_child_scripts() {
 	wp_enqueue_style( 'accelerate-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'accelerate-style' ));
     wp_enqueue_style( 'accelerate-child-google-fonts', '//fonts.googleapis.com/css?family=Londrina+Solid:400,900' );
+	//for manually coded icon-only footer menu
+	wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
 }
 add_action( 'wp_enqueue_scripts', 'accelerate_child_scripts' );
 
@@ -42,6 +55,8 @@ function create_custom_post_types() {
             'public' => true,
 			//no archive so we can use the About page to display instead
             'has_archive' => false,
+			//lets me use featured image for post mage rather than custom img field
+			'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes' ),
         )
     );
 }

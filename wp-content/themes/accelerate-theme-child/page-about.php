@@ -35,15 +35,10 @@ get_header(); ?>
 
 				<?php if ( $the_query->have_posts() ) : ?>
 					<!-- the loop -->
-					<?php while ( $the_query->have_posts() ) : $the_query->the_post();
-						$size = "full";
-						$service_image = get_field('service_image');
-					?>
+					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 						<section class="individual-service clearfix">
 							<figure class="about-service-image">
-								<?php if($service_image){
-									echo wp_get_attachment_image( $service_image, $size );
-								} ?>
+								<?php the_post_thumbnail('full'); ?>
 							</figure>
 							<aside class="about-service">
 								<h2><?php the_title(); ?></h2>

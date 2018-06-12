@@ -23,6 +23,7 @@ get_header(); ?>
                 <h1>Whoops, Took a Wrong Turn…</h1>
 				<p>Sorry, this page no longer exists, never existed or has been moved. We feel like complete jerks for totally misleading you.</p>
 				<p>Feel free to take a look around our <a href="<?php echo home_url(); ?>/blog">blog</a> or some of our <a href="<?php echo home_url(); ?>/case-studies">featured work.</a><p>
+				<?php get_search_form(); ?>
 			</aside>
 		</div><!-- .main-content -->
 	</div><!-- #primary -->

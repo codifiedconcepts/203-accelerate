@@ -54,6 +54,34 @@ get_header(); ?>
 		</div>
 	</section>
 
+	<!-- FEATURED SERVICES -->
+	<section class="featured-services">
+		<div class="site-content clearfix">
+			<h4>Our Services</h4>
+			<ul class="homepage-featured-services">
+				<?php
+				// the query
+				$the_query = new WP_Query( array(  'posts_per_page' => 4, 'post_type' => 'our_services' ) ); ?>
+
+				<?php if ( $the_query->have_posts() ) : ?>
+					<!-- the loop -->
+					<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+						<li class="individual-featured-service">
+							<a href="<?php echo home_url(); ?>/about">
+								<figure>
+									<?php the_post_thumbnail('full'); ?>
+								</figure>
+								<h3><?php the_title(); ?></h3>
+							</a>
+						</li>
+					<?php endwhile; ?>
+					<!-- end of the loop -->
+					<?php wp_reset_postdata(); ?>
+				<?php endif; ?>
+			</ul>
+		</div>
+	</section>
+
 	<!-- RECENT BLOG POST -->
 	<?php
 	// the query
